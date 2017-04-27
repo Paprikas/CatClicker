@@ -68,11 +68,11 @@ Cat.prototype = {
 };
 
 var cats = [
-  new Cat("Martha", "./assets/images/martha.jpg"),
-  new Cat("Boss", "./assets/images/boss.jpg"),
-  new Cat("Anna", "./assets/images/anna.jpg"),
-  new Cat("Hat Cat", "./assets/images/hat_cat.jpg"),
-  new Cat("Mother Cat", "./assets/images/mother_cat.jpg"),
+  new Cat("Martha", "./martha.jpg"),
+  new Cat("Boss", "./boss.jpg"),
+  new Cat("Anna", "./anna.jpg"),
+  new Cat("Hat Cat", "./hat_cat.jpg"),
+  new Cat("Mother Cat", "./mother_cat.jpg"),
 ];
 
 for (var index in cats) {
