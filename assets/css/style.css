@@ -1,3 +1,14 @@
-.cat {
+.main-cat-container, .cats-container {
+  clear: both;
+}
+.cat-container {
+  float: left;
+  padding: 10px;
+}
+.cat-container div {
+  font-size: 18px;
+}
+
+.cat-container img {
   width: 250px;
 }

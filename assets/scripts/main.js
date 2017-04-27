@@ -1,54 +1,80 @@
+var main_cat_container = document.createElement("DIV");
+var main_cat_container_class = document.createAttribute("class");
+main_cat_container_class.value = "main-cat-container";
+main_cat_container.setAttributeNode(main_cat_container_class);
+document.body.appendChild(main_cat_container);
+
+var cats_container = document.createElement("DIV");
+var cats_container_class = document.createAttribute("class");
+cats_container_class.value = "cats-container";
+cats_container.setAttributeNode(cats_container_class);
+document.body.appendChild(cats_container);
+
 function Cat(name, image) {
   this.name = name;
   this.image = image;
 }
 
-Cat.prototype.clicked = function() {
-  counter = document.getElementById(this.id);
-  this.click_count++;
-  counter.innerText = this.click_count;
-};
+Cat.prototype = {
+  clicked: function() {
+    counter = document.getElementById(this.id);
+    this.click_count++;
+    counter.innerText = this.click_count;
+  },
+  renderToList: function(id) {
+    var self = this; // Find best practice
+    this.id = "cat_" + id;
+    this.click_count = 0;
 
-Cat.prototype.render = function(id) {
-  this.id = "cat_" + id;
-  this.click_count = 0;
+    var paragraph = document.createElement("P");
+    paragraph.innerText = this.name;
 
-  var div_container = document.createElement("DIV");
-  var h1_counter = document.createElement("H1");
-  var counter_id = document.createAttribute("id");
-  counter_id.value = this.id;
-  h1_counter.setAttributeNode(counter_id);
+    paragraph.addEventListener("click", function() {
+      self.renderToMain();
+    });
 
-  var div_name = document.createElement("DIV");
-  div_name.innerText = this.name;
+    document.body.appendChild(paragraph);
+  },
+  renderToMain: function() {
+    var self = this; // Find best practice
 
-  var cat_image = document.createElement("IMG");
-  var image_attr_src = document.createAttribute("src");
-  image_attr_src.value = this.image;
-  cat_image.setAttributeNode(image_attr_src);
+    var div_container = document.createElement("DIV");
+    div_container.setAttribute("class", "cat-container");
 
-  var image_class_src = document.createAttribute("class");
-  image_class_src.value = "cat";
-  cat_image.setAttributeNode(image_class_src);
+    var h1_counter = document.createElement("H1");
+    h1_counter.setAttribute("id", this.id);
+    h1_counter.innerText = this.click_count;
 
-  div_container.appendChild(h1_counter);
-  div_container.appendChild(div_name);
-  div_container.appendChild(cat_image);
+    var div_cat_name = document.createElement("DIV");
+    div_cat_name.innerText = this.name;
 
-  document.body.appendChild(div_container);
+    var img_cat = document.createElement("IMG");
+    img_cat.setAttribute("src", this.image);
 
-  var self = this; // Find best practice
+    div_container.appendChild(h1_counter);
+    div_container.appendChild(div_cat_name);
+    div_container.appendChild(img_cat);
 
-  cat_image.addEventListener("click", function() {
-    self.clicked();
-  });
+    if (main_cat_container.childNodes[0] === undefined) {
+      main_cat_container.appendChild(div_container);
+    } else {
+      main_cat_container.replaceChild(div_container, main_cat_container.childNodes[0]);
+    }
+
+    img_cat.addEventListener("click", function() {
+      self.clicked();
+    });
+  }
 };
 
 var cats = [
   new Cat("Martha", "./assets/images/martha.jpg"),
-  new Cat("Boss", "./assets/images/boss.jpg")
+  new Cat("Boss", "./assets/images/boss.jpg"),
+  new Cat("Anna", "./assets/images/anna.jpg"),
+  new Cat("Hat Cat", "./assets/images/hat_cat.jpg"),
+  new Cat("Mother Cat", "./assets/images/mother_cat.jpg"),
 ];
 
 for (var index in cats) {
-  cats[index].render(index);
+  cats[index].renderToList(index);
 }
