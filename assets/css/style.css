@@ -1,8 +1,4 @@
-.main-cat-container, .cats-container {
-  clear: both;
-}
 .cat-container {
-  float: left;
   padding: 10px;
 }
 .cat-container div {
@@ -11,4 +7,8 @@
 
 .cat-container img {
   width: 250px;
+}
+
+p {
+  cursor: pointer;
 }
