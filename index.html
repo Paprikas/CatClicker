@@ -9,10 +9,48 @@
     <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
-    <div class="main-cat-container">
-      <h1 id="main-cat-name"></h1>
-      <div id="main-cat-clicks"></div>
-      <img id="main-cat-image" src="" alt="" />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div id="cat" class="hidden">
+            <h1 id="cat-name"></h1>
+            <div id="cat-clicks"></div>
+            <img id="cat-image" src="" alt="" />
+            <div class="form-group">
+              <button type="button" class="btn btn-primary m-t-2" id="show-admin">Admin</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4" id="cats-list">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="admin-container" class="hidden">
+            <h2>Admin panel</h2>
+            <div class="form-group">
+              <label>
+                Name
+                <input type="text" id="a-name" value="">
+              </label>
+            </div>
+              <div class="form-group">
+                <label>
+                  Image path
+                  <input type="text" id="a-image" value="">
+                </label>
+            </div>
+              <div class="form-group">
+                <label>
+                  Clicks
+                  <input type="text" id="a-clicks" value="">
+                </label>
+            </div>
+            <button type="button" class="btn btn-warning" id="cancel-button">Cancel</button>
+            <button type="button" class="btn btn-success" id="update-button">Update</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./assets/scripts/main.js"></script>

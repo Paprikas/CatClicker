@@ -1,12 +1,13 @@
-.main-cat-container {
-  padding: 10px;
-}
-#main-cat-clicks {
+#cat-clicks {
   font-size: 18px;
 }
 
-#main-cat-image {
+#cat-image {
   width: 250px;
+}
+
+.hidden {
+  display: none;
 }
 
 p {
