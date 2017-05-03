@@ -1,11 +1,11 @@
-.cat-container {
+.main-cat-container {
   padding: 10px;
 }
-.cat-container div {
+#main-cat-clicks {
   font-size: 18px;
 }
 
-.cat-container img {
+#main-cat-image {
   width: 250px;
 }
 

@@ -49,17 +49,26 @@ var controller = {
   getCats: function () {
     return model.cats
   },
-  incrementCat: function (cat) {
-    cat.clicks++
-    view.renderToMain(cat)
+  incrementClicks: function () {
+    model.currentCat.clicks++
+    view.renderToMain(model.currentCat)
+  },
+  setCurrentCat: function (cat) {
+    model.currentCat = cat
+  },
+  getCurrentCat: function () {
+    return model.currentCat
   }
 }
 
 var view = {
   init: function () {
-    var mainCatContainer = document.createElement('DIV')
-    mainCatContainer.setAttribute('id', 'main-cat-container')
-    document.body.appendChild(mainCatContainer)
+    this.catClicks = document.getElementById('main-cat-clicks')
+    this.catName = document.getElementById('main-cat-name')
+    this.catImage = document.getElementById('main-cat-image')
+    this.catImage.addEventListener('click', function () {
+      controller.incrementClicks()
+    })
 
     this.renderList()
   },
@@ -72,42 +81,21 @@ var view = {
 
       paragraph.addEventListener('click', (
         function (cat) {
-          return function () { view.renderToMain(cat) }
+          return function () {
+            controller.setCurrentCat(cat)
+            view.renderToMain()
+          }
         }
       )(cat))
 
       document.body.appendChild(paragraph)
     }
   },
-  renderToMain: function (cat) {
-    var divContainer = document.createElement('DIV')
-    divContainer.setAttribute('class', 'cat-container')
-
-    var h1Counter = document.createElement('H1')
-    h1Counter.setAttribute('id', cat.id)
-    h1Counter.innerText = cat.clicks
-
-    var divCatName = document.createElement('DIV')
-    divCatName.innerText = cat.name
-
-    var imgCat = document.createElement('IMG')
-    imgCat.setAttribute('src', './assets/images/' + cat.image)
-
-    divContainer.appendChild(h1Counter)
-    divContainer.appendChild(divCatName)
-    divContainer.appendChild(imgCat)
-
-    var mainCatContainer = document.getElementById('main-cat-container')
-
-    if (mainCatContainer.childNodes[0] === undefined) {
-      mainCatContainer.appendChild(divContainer)
-    } else {
-      mainCatContainer.replaceChild(divContainer, mainCatContainer.childNodes[0])
-    }
-
-    imgCat.addEventListener('click', function () {
-      controller.incrementCat(cat)
-    })
+  renderToMain: function () {
+    var cat = controller.getCurrentCat()
+    this.catClicks.innerText = cat.clicks
+    this.catName.innerText = cat.name
+    this.catImage.setAttribute('src', './assets/images/' + cat.image)
   }
 }
 
